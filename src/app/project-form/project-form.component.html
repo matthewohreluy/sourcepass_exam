@@ -1,0 +1,33 @@
+
+<form class="example-form" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  <h3>{{project!.projectName}}</h3>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Task</mat-label>
+    <input matInput formControlName="taskName">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" >
+    <mat-label>Total Estimate</mat-label>
+    <input type="number" matInput formControlName="totalEstimate">
+  </mat-form-field>
+
+  <p>Employee Estimations: -</p>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Employee</mat-label>
+    <mat-select formControlName="employee">
+      <mat-option *ngFor="let employee of (employeeService.employees$ | async)" [value]="employee.employeeId">
+        {{employee.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" >
+    <mat-label>Employee Estimate</mat-label>
+    <input type="number" matInput formControlName="employeeEstimate">
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" color="primary" [disabled]="!projectForm.valid">Save</button>
+</form>
+
+
